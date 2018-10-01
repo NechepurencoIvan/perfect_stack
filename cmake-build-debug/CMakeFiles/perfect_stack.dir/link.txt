@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/perfect_stack.dir/main.cpp.o  -o perfect_stack 
