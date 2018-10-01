@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/ivan/Рабочий стол/nepotrata/hw3/perfect_stack/main.cpp
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/main.cpp
 iostream
 -
 secure_header.h
-/home/ivan/Рабочий стол/nepotrata/hw3/perfect_stack/secure_header.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
 
-/home/ivan/Рабочий стол/nepotrata/hw3/perfect_stack/secure_header.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
 

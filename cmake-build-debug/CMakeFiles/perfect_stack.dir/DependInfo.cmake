@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ivan/Рабочий стол/nepotrata/hw3/perfect_stack/main.cpp" "/home/ivan/Рабочий стол/nepotrata/hw3/perfect_stack/cmake-build-debug/CMakeFiles/perfect_stack.dir/main.cpp.o"
+  "/home/ivan/Рабочий стол/nepotrata/perfect_stack/main.cpp" "/home/ivan/Рабочий стол/nepotrata/perfect_stack/cmake-build-debug/CMakeFiles/perfect_stack.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
