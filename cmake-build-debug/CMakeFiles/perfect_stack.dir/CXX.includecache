@@ -6,11 +6,37 @@
 
 #IncludeRegexTransform: 
 
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/canarey.h
+
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/counter.cpp
+
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/exceptions.h
+
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/main.cpp
+stack.cpp
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/stack.cpp
+
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/memory_classes.cpp
 iostream
 -
+exceptions.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/exceptions.h
 secure_header.h
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
 
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
+
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/stack.cpp
+iostream
+-
+secure_header.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
+memory_classes.cpp
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/memory_classes.cpp
+canarey.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/canarey.h
+exceptions.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/exceptions.h
+counter.cpp
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/counter.cpp
 
