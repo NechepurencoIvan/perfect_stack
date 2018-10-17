@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "exceptions.h"
+#include "canarey.h"
 #include "secure_header.h"
 
 template <typename T>
@@ -93,27 +94,47 @@ public:
     }
 
     T& operator [](size_t addr) const {
+        if(addr >= buffer_size || addr < 0){
+            throw outOfMemoryException("incorrect index on memory transaction, this was not supposed to happen");
+        }
         return buffer[addr];
     }
 
     size_t get_size() const {
+
         return buffer_size;
     }
 
     void log(std::ostream &out) const {
         out<<"I am static memory))"<<std::endl;
+        checkCanary(out, "bcanary1", bcanary1, CANARY2);
         T* explorer = buffer;
         for(size_t i = 0; i < buffer_size; ++i){
             out<<"buffer_["<<i<<"] = "<<buffer[i]/*&explorer*/<<std::endl;
             explorer++;
         }
+        checkCanary(out, "bcanary2", bcanary2, CANARY2);
+        std::cout<<"buffer_size = "<< buffer_size << std::endl;
+        checkCanary(out, "bcanary3", bcanary3, CANARY2);
+
     }
 
     void voidValue(size_t addr){
+        if(addr >= buffer_size || addr < 0){
+            throw outOfMemoryException("incorrect index on memory transaction, this was not supposed to happen");
+        }
         voidVal<T>(buffer + addr);
     }
-private:
-    T* buffer = nullptr;
-    size_t buffer_size;
-};
 
+    long controlSum(){
+        return 0;
+    }
+private:
+    char bcanary1 = CANARY2;
+    T* buffer = nullptr;
+    char bcanary2 = CANARY2;
+    size_t buffer_size;
+    char bcanary3 = CANARY2;
+    long control_sum;
+    char end;
+};

@@ -1,11 +1,15 @@
 #pragma once
 
-class outOfMemoryException {
-public:
+struct outOfMemoryException {
     outOfMemoryException(char* ex) {
-
+        description = ex;
     }
+    char* description;
+};
 
-private:
-    char* title;
+struct emptyStackTrasactionException {
+    emptyStackTrasactionException(char* ex) {
+        description = ex;
+    }
+    char* description;
 };
