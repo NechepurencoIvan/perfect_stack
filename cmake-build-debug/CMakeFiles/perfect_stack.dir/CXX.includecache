@@ -25,6 +25,8 @@ canarey.h
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/canarey.h
 secure_header.h
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
+counter.cpp
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/counter.cpp
 
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/secure_header.h
 
@@ -39,6 +41,8 @@ canarey.h
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/canarey.h
 exceptions.h
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/exceptions.h
+assert.h
+/home/ivan/Рабочий стол/nepotrata/perfect_stack/assert.h
 counter.cpp
 /home/ivan/Рабочий стол/nepotrata/perfect_stack/counter.cpp
 

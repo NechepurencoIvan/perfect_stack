@@ -4,6 +4,7 @@
 #include "exceptions.h"
 #include "canarey.h"
 #include "secure_header.h"
+#include "counter.cpp"
 
 template <typename T>
 void clear_memory(T* buffer, size_t buffersize){
@@ -28,6 +29,7 @@ public:
 private:
 };
 
+//соре за копипасту двух реализаций
 template <typename T>
 class dynamicMemory: public memory<T> {
 public:
@@ -44,9 +46,9 @@ public:
     }
 
     void reallocate(){
-        std::cout<<"reallocating"<<std::endl;
         size_t new_buffer_size = buffer_size * 2;
         T* new_buffer = new T[new_buffer_size];
+        clear_memory(new_buffer, new_buffer_size);
         for(size_t i = 0; i < buffer_size; ++i){ //stupid spending of time
             new_buffer[i] = buffer[i];
         }
@@ -56,6 +58,9 @@ public:
     }
 
     T& operator [](size_t addr) const {
+        if(addr >= buffer_size || addr < 0){
+            throw outOfMemoryException("incorrect index on memory transaction, this was not supposed to happen");
+        }
         return buffer[addr];
     }
 
@@ -64,15 +69,47 @@ public:
     }
 
     void log(std::ostream &out) const {
-        out<<"I am dinamic memory))"<<std::endl;
+        out<<"      I am dinamic memory))"<<std::endl;
+        checkCanary(out << "      ", "bcanary1", bcanary1, CANARY2);
+        for(size_t i = 0; i < buffer_size; ++i){
+            out<<"      buffer_["<<i<<"] = "<<buffer[i]<<std::endl;
+        }
+        checkCanary(out << "      ", "bcanary2", bcanary2, CANARY2);
+        std::cout<<"      buffer_size = "<< buffer_size << std::endl;
+        checkCanary(out << "      ", "bcanary3", bcanary3, CANARY2);
     }
 
     void voidValue(size_t addr){
         voidVal<T>(buffer + addr);
     }
+
+    long controlSum() const {
+        return countSum((char*) &bcanary1, (char*) &end);
+    }
+
+    bool validate(size_t size) const {
+        if(bcanary1 != CANARY2 || bcanary2 != CANARY2 || bcanary3 != CANARY2){
+            return false;
+        }
+        bool flag = true;
+        T* voidValue = new T;
+        voidVal(voidValue);
+        for(size_t i = size; i < buffer_size; ++i){
+            if (buffer[i] != *voidValue) {
+                flag = false;
+                break;
+            }
+        }
+        delete voidValue;
+        return flag;
+    }
 private:
+    unsigned bcanary1 = CANARY2;
     T* buffer = nullptr;
+    unsigned bcanary2 = CANARY2;
     size_t buffer_size;
+    unsigned bcanary3 = CANARY2;
+    char end;
 };
 
 template <typename T>
@@ -106,17 +143,14 @@ public:
     }
 
     void log(std::ostream &out) const {
-        out<<"I am static memory))"<<std::endl;
-        checkCanary(out, "bcanary1", bcanary1, CANARY2);
-        T* explorer = buffer;
+        out<<"      I am static memory))"<<std::endl;
+        checkCanary(out << "      ", "bcanary1", bcanary1, CANARY2);
         for(size_t i = 0; i < buffer_size; ++i){
-            out<<"buffer_["<<i<<"] = "<<buffer[i]/*&explorer*/<<std::endl;
-            explorer++;
+            out<<"      buffer_["<<i<<"] = "<<buffer[i]<<std::endl;
         }
-        checkCanary(out, "bcanary2", bcanary2, CANARY2);
-        std::cout<<"buffer_size = "<< buffer_size << std::endl;
-        checkCanary(out, "bcanary3", bcanary3, CANARY2);
-
+        checkCanary(out << "      ", "bcanary2", bcanary2, CANARY2);
+        std::cout<<"      buffer_size = "<< buffer_size << std::endl;
+        checkCanary(out << "      ", "bcanary3", bcanary3, CANARY2);
     }
 
     void voidValue(size_t addr){
@@ -126,15 +160,31 @@ public:
         voidVal<T>(buffer + addr);
     }
 
-    long controlSum(){
-        return 0;
+    long controlSum() const {
+        return countSum((char*) &bcanary1, (char*) &end);
+    }
+
+    bool validate(size_t size) const {
+        if(bcanary1 != CANARY2 || bcanary2 != CANARY2 || bcanary3 != CANARY2){
+            return false;
+        }
+        bool flag = true;
+        T* voidValue = new T;
+        voidVal(voidValue);
+        for(size_t i = size; i < buffer_size; ++i){
+            if (buffer[i] != *voidValue) {
+                flag = false;
+                break;
+            }
+        }
+        delete voidValue;
+        return flag;
     }
 private:
-    char bcanary1 = CANARY2;
+    unsigned bcanary1 = CANARY2;
     T* buffer = nullptr;
-    char bcanary2 = CANARY2;
+    unsigned bcanary2 = CANARY2;
     size_t buffer_size;
-    char bcanary3 = CANARY2;
-    long control_sum;
+    unsigned bcanary3 = CANARY2;
     char end;
 };

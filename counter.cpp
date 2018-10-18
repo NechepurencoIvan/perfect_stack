@@ -1,3 +1,5 @@
+#pragma once
+
 long feedValue(long sum, long val) {
     return sum + val;
 }
